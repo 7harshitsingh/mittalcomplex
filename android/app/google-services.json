@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "659260484645",
+    "project_id": "mittal-complex",
+    "storage_bucket": "mittal-complex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659260484645:android:0b1104881d1df04161a3cc",
+        "android_client_info": {
+          "package_name": "com.example.mittalcomplex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659260484645-6adourd2hhjr6jhfevlmtsfup5c6dkmr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo-o-ivqnEkJJo-eXBlyFjoGewP_0Vr5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659260484645-6adourd2hhjr6jhfevlmtsfup5c6dkmr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
