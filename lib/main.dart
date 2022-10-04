@@ -7,17 +7,27 @@ import 'package:mittalcomplex/screens/auth/login.dart';
 import 'package:mittalcomplex/screens/custom/getstarted.dart';
 import 'package:mittalcomplex/utils.dart';
 import 'package:mittalcomplex/utils/apptheme.dart';
+import 'package:mittalcomplex/utils/defaultdata.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
 
-  defaultRadius = 10;
   defaultToastGravityGlobal = ToastGravity.BOTTOM;
 
-  runApp(const mittalcomplex());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider(
+          create: (_) => Defaultdata()
+        )
+      ],
+      child: const mittalcomplex(),
+    )
+  );
 }
 
 // ignore: camel_case_types
@@ -25,7 +35,7 @@ class mittalcomplex extends StatelessWidget {
   const mittalcomplex({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Observer(
       builder: (_) => MaterialApp(
         debugShowCheckedModeBanner: false,

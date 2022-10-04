@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mittalcomplex/components/explore/profilescreen.dart';
-import 'package:mittalcomplex/screens/profilesetup/addposition.dart';
 import 'package:mittalcomplex/screens/profilesetup/uploadprofilepic.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class AddName extends StatefulWidget {
   const AddName({Key? key}) : super(key: key);
@@ -51,12 +48,7 @@ class _AddNameState extends State<AddName> {
                     onPressed: () {
                       final fullname = nameController.text;
                       addName(fullname: fullname);
-                      if (position == "Member") {
-                        const UploadProfile().launch(context);
-                      }
-                      if (position == "Staff" || position == "Admin") {
-                        const ProfileScreen().launch(context);
-                      }
+                      const UploadProfile().launch(context);
                     },
                     icon: const Icon(
                       Icons.forward,
@@ -100,7 +92,7 @@ class _AddNameState extends State<AddName> {
 
   Future addName({required String fullname}) async {
     final docUser =
-        FirebaseFirestore.instance.collection(position).doc(auth.uid);
+        FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
     final json = {'name': fullname};
     await docUser.update(json);
   }

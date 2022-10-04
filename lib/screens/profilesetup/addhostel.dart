@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +7,15 @@ import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class AddFav extends StatefulWidget {
-  const AddFav({Key? key}) : super(key: key);
+class AddHostel extends StatefulWidget {
+  const AddHostel({Key? key}) : super(key: key);
 
   @override
-  State<AddFav> createState() => _AddFavState();
+  State<AddHostel> createState() => _AddHostelState();
 }
 
-class _AddFavState extends State<AddFav> {
-  final favController = TextEditingController();
+class _AddHostelState extends State<AddHostel> {
+  final hostelController = TextEditingController();
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -25,7 +26,7 @@ class _AddFavState extends State<AddFav> {
 
   @override
   void dispose() {
-    favController.dispose();
+    hostelController.dispose();
     setStatusBarColor(transparentColor);
     super.dispose();
   }
@@ -40,12 +41,12 @@ class _AddFavState extends State<AddFav> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: heading(title: "Favourites"),
+                child: heading(title: "Hostel"),
               ),
               IconButton(
                   onPressed: () {
-                    final favourite = favController.text;
-                    AddFav(fav: favourite);
+                    final hst = hostelController.text;
+                    AddHostel(hostel: hst);
                     Navigator.pushAndRemoveUntil<dynamic>(
                       context,
                       MaterialPageRoute<dynamic>(
@@ -68,13 +69,15 @@ class _AddFavState extends State<AddFav> {
             child: Column(
               children: [
                 AppTextField(
+                  maxLength: 18,
                   autoFocus: true,
-                  controller: favController,
-                  textFieldType: TextFieldType.MULTILINE,
+                  controller: hostelController,
+                  textFieldType: TextFieldType.NAME,
                   cursorColor: mcPrimaryColor,
                   textStyle: boldTextStyle(color: Colors.white),
                   suffixIconColor: mcPrimaryColor,
                   decoration: const InputDecoration(
+                    hintText: "max 18 digits",
                     border: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: UnderlineInputBorder(
@@ -92,10 +95,9 @@ class _AddFavState extends State<AddFav> {
   }
 
   // ignore: non_constant_identifier_names
-  Future AddFav({required String fav}) async {
-    final docUser =
-        FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
-    final json = {'fav': fav};
+  Future AddHostel({required String hostel}) async {
+    final docUser = FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
+    final json = {'hostel': hostel};
     await docUser.update(json);
   }
 }

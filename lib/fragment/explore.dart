@@ -3,8 +3,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mittalcomplex/components/explore/mainpart.dart';
-import 'package:mittalcomplex/components/explore/profilescreen.dart';
-import 'package:mittalcomplex/components/explore/upcoming_events.dart';
+import 'package:mittalcomplex/components/explore/settingsscreen.dart';
+import 'package:mittalcomplex/components/explore/popularevents.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -22,7 +22,6 @@ class ExploreFragment extends StatefulWidget {
 
 class ExploreFragmentState extends State<ExploreFragment> {
   String avatar = " ";
-  //int sceneIndex = 0;
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -36,7 +35,7 @@ class ExploreFragmentState extends State<ExploreFragment> {
     final path = auth.uid;
     final ref = FirebaseStorage.instance
         .ref()
-        .child('Member/profile/$path/myprofilepic');
+        .child('usersData/profile/$path/myprofilepic');
 
     ref.getDownloadURL().then((value) {
       setState(() {
@@ -68,14 +67,17 @@ class ExploreFragmentState extends State<ExploreFragment> {
                   ).paddingLeft(16),
                   GestureDetector(
                     onTap: () {
-                      const ProfileScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Scale);
+                      const SettingsScreen().launch(context);
                     },
                     child: avatar == " "
                         ? const Icon(Icons.person,
                             color: Colors.white, size: 28)
-                        : Image.network(avatar,
-                                fit: BoxFit.fitWidth, height: 40, width: 40,)
-                            .cornerRadiusWithClipRRect(100),
+                        : Image.network(
+                            avatar,
+                            fit: BoxFit.fitWidth,
+                            height: 40,
+                            width: 40,
+                          ).cornerRadiusWithClipRRect(100),
                   ).paddingRight(20),
                 ],
               ),
@@ -89,54 +91,69 @@ class ExploreFragmentState extends State<ExploreFragment> {
                 child: Column(
                   children: [
                     Row(
-                    mainAxisAlignment : MainAxisAlignment.start,
-                    children: [
-                      const DefaultTextStyle(
-                        style: TextStyle(
-                        fontSize: 18.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                        ),
-                        child: Text('Spotlight'),
-                      ).paddingLeft(16),
-                      8.width,
-                      const FaIcon(FontAwesomeIcons.faceSmile, color: white, size: 18,)
-                    ],),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                          ),
+                          child: Text('Spotlight'),
+                        ).paddingLeft(16),
+                        8.width,
+                        const FaIcon(
+                          FontAwesomeIcons.faceSmile,
+                          color: Colors.white,
+                          size: 18,
+                        )
+                      ],
+                    ),
                     const VeiwSports(),
                     12.height,
                     Row(
-                    mainAxisAlignment : MainAxisAlignment.start,
-                    children: [
-                      const DefaultTextStyle(
-                        style: TextStyle(
-                        fontSize: 18.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                          ),
+                          child: Text('Popular Events'),
+                        ).paddingLeft(16),
+                        8.width,
+                        const FaIcon(
+                          FontAwesomeIcons.empire,
+                          color: white,
+                          size: 18,
                         ),
-                        child: Text('Upcoming Events'),
-                      ).paddingLeft(16),
-                      8.width,
-                      const FaIcon(FontAwesomeIcons.empire, color: white, size: 18,)
-                    ],),
+                      ],
+                    ),
                     16.height,
-                    const UpcomingEventComponent(),
+                    const PopularEventComponent(),
                     Row(
-                    mainAxisAlignment : MainAxisAlignment.start,
-                    children: [
-                      const DefaultTextStyle(
-                        style: TextStyle(
-                        fontSize: 18.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                        ),
-                        child: Text('Health Tips'),
-                      ).paddingLeft(16),
-                      8.width,
-                      const FaIcon(FontAwesomeIcons.heart, color: white, size: 18,)
-                    ],),
-                  20.height,
-                  const HealthTipsComponent(),
-                  24.height,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'Poppins',
+                            color: Colors.white,
+                          ),
+                          child: Text('Health Tips'),
+                        ).paddingLeft(16),
+                        8.width,
+                        const FaIcon(
+                          FontAwesomeIcons.heart,
+                          color: white,
+                          size: 18,
+                        )
+                      ],
+                    ),
+                    20.height,
+                    const HealthTipsComponent(),
+                    24.height,
                   ],
                 ),
               ),

@@ -36,16 +36,20 @@ dependencies:
   email_validator: ^2.1.17
   firebase_auth: ^3.7.0
   firebase_core: ^1.21.1
+  firebase_messaging: ^13.0.2
   firebase_storage: ^10.3.7
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^9.9.1
   flutter_mobx: ^2.0.6+1
   flutter_vector_icons: ^1.0.0
   font_awesome_flutter: ^10.1.0
   google_fonts: ^3.0.1
   image_picker: ^0.8.5+3
   nb_utils: ^4.6.20
+  provider: ^6.0.3
   url_launcher: ^6.1.5
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0

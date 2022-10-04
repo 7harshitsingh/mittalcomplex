@@ -15,10 +15,12 @@ class VeiwSports extends StatefulWidget {
 }
 
 class _VeiwSportsState extends State<VeiwSports> {
-  List sportsList = getsportsList();
 
   @override
   Widget build(BuildContext context) {
+
+    List<Model> sportsList = getsportsList();
+
     return HorizontalList(
       itemCount: 4,
       spacing: 0,
@@ -27,39 +29,40 @@ class _VeiwSportsState extends State<VeiwSports> {
       itemBuilder: (_, index) {
         Model sports = sportsList[index];
 
-        return Container(
-          margin: const EdgeInsets.all(4),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              commonCachedNetworkImage(
-                sports.img,
-                fit: BoxFit.cover,
-                height: context.height() * 0.45,
-                width: 230,
-              ).cornerRadiusWithClipRRect(10).onTap(
-                    () {},
+        return GestureDetector(
+          onTap: sports.ontap!(),
+          child: Container(
+            margin: const EdgeInsets.all(4),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                commonCachedNetworkImage(
+                  sports.img,
+                  fit: BoxFit.cover,
+                  height: context.height() * 0.45,
+                  width: 230,
+                ).cornerRadiusWithClipRRect(10),
+                Container(
+                  padding: const EdgeInsets.only(top: 8),
+                  height: 50,
+                  width: 230,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(sports.name!,
+                                  style: boldTextStyle(color: white, size: 20))
+                              .paddingLeft(10),
+                        ],
+                      ),
+                    ],
                   ),
-              Container(
-                padding: const EdgeInsets.only(top: 8),
-                height: 50,
-                width: 230,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(sports.name!,
-                                style: boldTextStyle(color: white, size: 20))
-                            .paddingLeft(10),
-                      ],
-                    ),
-                  ],
                 ),
-              ),
-            ],
-          ).paddingSymmetric(horizontal: 4),
+              ],
+            ).paddingSymmetric(horizontal: 4),
+          ),
         );
       },
     );

@@ -6,15 +6,15 @@ import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class AddFav extends StatefulWidget {
-  const AddFav({Key? key}) : super(key: key);
+class AddWeight extends StatefulWidget {
+  const AddWeight({Key? key}) : super(key: key);
 
   @override
-  State<AddFav> createState() => _AddFavState();
+  State<AddWeight> createState() => _AddWeightState();
 }
 
-class _AddFavState extends State<AddFav> {
-  final favController = TextEditingController();
+class _AddWeightState extends State<AddWeight> {
+  final weightController = TextEditingController();
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -25,7 +25,7 @@ class _AddFavState extends State<AddFav> {
 
   @override
   void dispose() {
-    favController.dispose();
+    weightController.dispose();
     setStatusBarColor(transparentColor);
     super.dispose();
   }
@@ -40,20 +40,20 @@ class _AddFavState extends State<AddFav> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: heading(title: "Favourites"),
+                child: heading(title: "Add Weight"),
               ),
               IconButton(
                   onPressed: () {
-                    final favourite = favController.text;
-                    AddFav(fav: favourite);
+                    final weight = weightController.text;
+                    AddWeight(weight: weight);
                     Navigator.pushAndRemoveUntil<dynamic>(
-                      context,
-                      MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) =>
-                            const ViewProfileScreen(),
-                      ),
-                      (route) => false,
-                    );
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                              const ViewProfileScreen(),
+                        ),
+                        (route) => false,
+                      );
                   },
                   icon: const Icon(
                     Icons.forward,
@@ -69,8 +69,8 @@ class _AddFavState extends State<AddFav> {
               children: [
                 AppTextField(
                   autoFocus: true,
-                  controller: favController,
-                  textFieldType: TextFieldType.MULTILINE,
+                  controller: weightController,
+                  textFieldType: TextFieldType.NUMBER,
                   cursorColor: mcPrimaryColor,
                   textStyle: boldTextStyle(color: Colors.white),
                   suffixIconColor: mcPrimaryColor,
@@ -92,10 +92,13 @@ class _AddFavState extends State<AddFav> {
   }
 
   // ignore: non_constant_identifier_names
-  Future AddFav({required String fav}) async {
+  Future AddWeight(
+      {required String weight}) async {
     final docUser =
         FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
-    final json = {'fav': fav};
+    final json = {
+      'weight': weight,
+    };
     await docUser.update(json);
   }
 }

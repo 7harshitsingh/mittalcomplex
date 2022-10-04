@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mittalcomplex/screens/auth/register.dart';
-import 'package:mittalcomplex/screens/dashboard/dashboard.dart';
+import 'package:mittalcomplex/screens/custom/splashscreen.dart';
 import 'package:mittalcomplex/utils.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -74,7 +74,7 @@ class _isEmailVerifiedState extends State<isEmailVerified> {
 
   @override
   Widget build(BuildContext context) => verification
-      ? const DashboardScreen()
+      ? const SplashScreen()
       : Scaffold(
           backgroundColor: mcPrimaryColorDark,
           body: SingleChildScrollView(

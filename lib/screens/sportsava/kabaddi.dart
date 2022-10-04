@@ -69,7 +69,7 @@ class _KabaddiState extends State<Kabaddi> {
                       ),
                   color: white,
                   onTap: (){},
-                  child: Text('Book Slot',
+                  child: Text('View Slot',
                       style: boldTextStyle(color: Colors.black, size: 26, fontFamily: 'Poppins')),
                 ).expand(),
               ],

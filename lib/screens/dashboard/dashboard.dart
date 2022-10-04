@@ -8,6 +8,7 @@ import 'package:mittalcomplex/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:mittalcomplex/widgets/bottombar.dart';
 
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
@@ -27,12 +28,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
-    setStatusBarColor(mcPrimaryColorDark);
+    setStatusBarColor(mcPrimaryColorDark); 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: mcPrimaryColor,
       body: dashBoardScreenList[_currentIndex],

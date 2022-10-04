@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mittalcomplex/screens/profilesetup/addposition.dart';
 import 'package:mittalcomplex/screens/profilesetup/enterkerberoes.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
@@ -15,16 +14,12 @@ class AddProgram extends StatefulWidget {
 }
 
 class _AddProgramState extends State<AddProgram> {
-  bool prog = false;
   String program = '';
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
     setStatusBarColor(mcPrimaryColorDark);
-    if (prog == true) {
-      const EnterKerberos().launch(context);
-    }
     super.initState();
   }
 
@@ -52,9 +47,6 @@ class _AddProgramState extends State<AddProgram> {
                     onPressed: () {
                       addProgram(program: program);
                       const EnterKerberos().launch(context);
-                      setState(() {
-                        prog = true;
-                      });
                     },
                     icon: const Icon(
                       Icons.forward,
@@ -101,7 +93,7 @@ class _AddProgramState extends State<AddProgram> {
 
   Future addProgram({required String program}) async {
     final docUser =
-        FirebaseFirestore.instance.collection(position).doc(auth.uid);
+        FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
     final json = {'program': program};
     await docUser.update(json);
   }

@@ -2,23 +2,26 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mittalcomplex/components/explore/upcomingevents.dart';
 import 'package:mittalcomplex/screens/custom/getstarted.dart';
+import 'package:mittalcomplex/screens/custom/termsandconditions.dart';
 import 'package:mittalcomplex/screens/dashboard/dashboard.dart';
 import 'package:mittalcomplex/screens/profilesetup/addposition.dart';
-import 'package:mittalcomplex/screens/profilesetup/viewprofile.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+import '../../screens/profilesetup/viewprofile.dart';
+
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _SettingsScreenState extends State<SettingsScreen> {
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -33,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          "Profile",
+          "Settings",
           style: boldTextStyle(color: Colors.white),
         ),
         leading: Container(
@@ -45,7 +48,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           child: const Icon(Icons.arrow_back, color: Colors.white),
         ).onTap(() {
-          const DashboardScreen().launch(context);
+          Navigator.pushAndRemoveUntil<dynamic>(
+            context,
+            MaterialPageRoute<dynamic>(
+              builder: (BuildContext context) => const DashboardScreen(),
+            ),
+            (route) => false,
+          );
         }),
         centerTitle: true,
         elevation: 0.0,
@@ -62,29 +71,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                profileContainer(
+                settingsContainer(
                     icon: Icons.view_agenda,
                     title: 'Veiw Profile',
                     textColor: white,
                     onTap: () {
                       const ViewProfileScreen().launch(context);
                     }),
-                profileContainer(
-                  icon: Icons.group,
-                  title: 'Staffs',
+                settingsContainer(
+                  icon: Icons.event_available,
+                  title: 'Upcoming Events',
                   textColor: white,
                   onTap: () {
-                    //SHMemberScreen().launch(context, pageRouteAnimation: PageRouteAnimation.SlideBottomTop);
+                    const UpcomingEvent().launch(context);
                   },
                 ),
-                profileContainer(
+                settingsContainer(
                     icon: Icons.settings,
                     title: 'Settings',
                     textColor: white,
                     onTap: () {}),
-                profileContainer(
+                settingsContainer(
                   icon: Icons.edit,
-                  title: 'Setup Basics',
+                  title: 'Edit Profile',
                   textColor: white,
                   onTap: () {
                     const AddPosition().launch(
@@ -94,12 +103,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                 ),
                 16.height,
-                profileContainer(
+                settingsContainer(
                     icon: Icons.chat,
-                    title: 'Terms of use',
+                    title: 'Terms and Conditions',
                     textColor: white,
-                    onTap: () {}),
-                profileContainer(
+                    onTap: () {
+                      const TermsandCondition().launch(context);
+                    }),
+                settingsContainer(
                     icon: Icons.mail,
                     title: 'FeedBack',
                     textColor: white,
@@ -111,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         await launchUrl(Uri.parse(url));
                       }
                     }),
-                profileContainer(
+                settingsContainer(
                     icon: Icons.logout,
                     title: 'SignOut',
                     textColor: Colors.deepOrange,
@@ -127,13 +138,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       );
                     }),
                 16.height,
-                profileContainer(
-                    //icon: Icons.send,
-                    title: 'Admin/Staff Zone',
+                settingsContainer(
+                    icon: Icons.verified,
+                    title: 'Admin/Staff Verification',
                     textColor: Colors.blue,
-                    onTap: () {}),
+                    onTap: () async {
+                      const email = "verification@devclub.iitd.ac.in";
+                      const url = "mailto:$email";
+
+                      if (await canLaunchUrl(Uri.parse(url))) {
+                        await launchUrl(Uri.parse(url));
+                      }
+                    }),
                 Text(
-                  'Version 11',
+                  'Version 1.0.0',
                   style: secondaryTextStyle(size: 12),
                 ).paddingLeft(16)
               ],

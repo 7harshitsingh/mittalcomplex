@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mittalcomplex/components/explore/profilescreen.dart';
-import 'package:mittalcomplex/screens/profilesetup/addposition.dart';
+import 'package:mittalcomplex/screens/profilesetup/uploadid.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -44,17 +43,17 @@ class _UploadProfileState extends State<UploadProfile> {
     final path = auth.uid;
     Reference ref = FirebaseStorage.instance
         .ref()
-        .child('$position/profile/$path/myprofilepic');
+        .child('usersData/profile/$path/myprofilepic');
     await ref.putFile(File(image!.path));
 
     fetchImage();
   }
 
-  void fetchImage() async {
+  void fetchImage() {
     final path = auth.uid;
     final ref = FirebaseStorage.instance
         .ref()
-        .child('$position/profile/$path/myprofilepic');
+        .child('usersData/profile/$path/myprofilepic');
 
     ref.getDownloadURL().then((value) {
       setState(() {
@@ -80,13 +79,7 @@ class _UploadProfileState extends State<UploadProfile> {
                   ),
                   IconButton(
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) => const ProfileScreen(),
-                          ),
-                          (route) => false,
-                      );
+                        const UploadID().launch(context);
                       },
                       icon: const Icon(
                         Icons.forward,
@@ -111,7 +104,8 @@ class _UploadProfileState extends State<UploadProfile> {
                           child: Container(
                             decoration: BoxDecoration(
                                 color: mcPrimaryColor,
-                                border: Border.all(color: Colors.white, width: 4),
+                                border:
+                                    Border.all(color: Colors.white, width: 4),
                                 borderRadius: radius(100)),
                             child: imageUrl == " "
                                 ? const Icon(Icons.person,

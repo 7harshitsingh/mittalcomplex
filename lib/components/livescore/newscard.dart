@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mittalcomplex/models/model.dart';
+import 'package:mittalcomplex/screens/custom/webview.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:url_launcher/link.dart';
 
 class NewsCard extends StatefulWidget {
-  static String tag = '/NBNewsComponent';
   final List<NewsModel>? list;
 
   // ignore: use_key_in_widget_constructors
@@ -16,7 +15,6 @@ class NewsCard extends StatefulWidget {
 }
 
 class _NewsCardState extends State<NewsCard> {
-
   @override
   void initState() {
     setStatusBarColor(mcPrimaryColor);
@@ -38,17 +36,16 @@ class _NewsCardState extends State<NewsCard> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Link(
-                  target: LinkTarget.self,
-                  uri: Uri.parse('${mData.details}'),
-                  builder: (context, followLink) => 
-                  GestureDetector(
-                    onTap: followLink,
-                    child: Text('${mData.title}',
-                        style: boldTextStyle(color: white.withOpacity(0.7)),
-                        softWrap: true,
-                        maxLines: 3),
-                  ),
+                GestureDetector(
+                  onTap: () {
+                    WebViewPage(
+                      website: mData.details,
+                    ).launch(context);
+                  },
+                  child: Text('${mData.title}',
+                      style: boldTextStyle(color: white.withOpacity(0.7)),
+                      softWrap: true,
+                      maxLines: 3),
                 ),
                 8.height,
                 Text('${mData.date}',

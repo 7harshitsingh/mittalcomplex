@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mittalcomplex/utils/colors.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 AppBar generalappBar(BuildContext context, String title,
     {List<Widget>? actions,
@@ -139,7 +140,7 @@ Widget indicatorBox() {
   );
 }
 
-profileContainer(
+settingsContainer(
     {String? title, IconData? icon, Function? onTap, Color? textColor}) {
   return Container(
     padding: const EdgeInsets.all(16),
@@ -166,12 +167,10 @@ sportsContainer(
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      //const Padding(padding: EdgeInsets.all(24)),
       Container(
         height: 165,
         width: 165,
         padding: const EdgeInsets.all(16),
-        //margin: const EdgeInsets.only(right: 24, left: 24, top: 8, bottom: 8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
@@ -184,7 +183,6 @@ sportsContainer(
         height: 165,
         width: 165,
         padding: const EdgeInsets.all(16),
-        //margin: const EdgeInsets.only(right: 24, left: 24, top: 8, bottom: 8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
@@ -216,12 +214,8 @@ listComp(String? title, String? subtitle, IconData? icon, String? link,
       style: primaryTextStyle(color: Colors.white38, size: 14),
     ),
     trailing: GestureDetector(
-      onTap: () async {
-        if (await canLaunchUrl(Uri.parse(link!))) {
-          await launchUrl(
-            Uri.parse(link),
-          );
-        }
+      onTap: () {
+        launchUrl(Uri.parse(link!));
       },
       child: Container(
         width: 80,
@@ -277,6 +271,17 @@ myslotlist(String? title, String? subtitle, IconData? icon, Color? textColor,
         ),
       ),
     ),
+  );
+}
+
+bookedslotlist(String? title, String? subtitle) {
+  return ListTile(
+    enabled: true,
+    contentPadding: EdgeInsets.zero,
+    leading: const FaIcon( FontAwesomeIcons.barcode, size: 28, color: Colors.white38,),
+    title: Text(title!, style: primaryTextStyle(color: Colors.white, size: 14),),
+    subtitle: Text( subtitle!, style: primaryTextStyle(color: Colors.white38, size: 14),),
+    trailing: const FaIcon(FontAwesomeIcons.accessibleIcon, size: 15, color: greenColor,),
   );
 }
 

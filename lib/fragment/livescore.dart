@@ -7,6 +7,7 @@ import 'package:mittalcomplex/models/model.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/defaultdata.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 class LiveScoreFragment extends StatefulWidget {
   const LiveScoreFragment({Key? key}) : super(key: key);
@@ -16,8 +17,6 @@ class LiveScoreFragment extends StatefulWidget {
 }
 
 class _LiveScoreFragmentState extends State<LiveScoreFragment> {
-  List<LiveScoreCardModel> scorecard = livescorecard();
-  List<NewsModel> mNewslist = newsDetails();
 
   PageController? pageController;
   int currentPosition = 1;
@@ -41,8 +40,14 @@ class _LiveScoreFragmentState extends State<LiveScoreFragment> {
 
   @override
   Widget build(BuildContext context) {
+
+    Defaultdata service = Provider.of<Defaultdata>(context, listen: false);
+    List<NewsModel> mNewslist = service.newsDetails();
+    List<LiveScoreCardModel> scorecard = service.livescorecard();
+
+
     return SafeArea(
-        child: Scaffold(
+      child: Scaffold(
       backgroundColor: mcPrimaryColorDark,
       body: SingleChildScrollView(
         child: Column(
@@ -75,11 +80,11 @@ class _LiveScoreFragmentState extends State<LiveScoreFragment> {
             SizedBox(
               height: 200,
               width: context.width(),
-              child: PageView(
+              child:
+              PageView(
                 controller: pageController,
                 children: scorecard.map((LiveScoreCardModel item) {
-                  return LiveCardComponent(item)
-                      .paddingOnly(right: 16);
+                  return LiveCardComponent(item).paddingOnly(right: 16);
                 }).toList(),
                 onPageChanged: (index) {
                   setState(() {
@@ -90,7 +95,7 @@ class _LiveScoreFragmentState extends State<LiveScoreFragment> {
             ),
             8.height,
             DotsIndicator(
-              dotsCount: 3,
+              dotsCount: scorecard.length,
               position: currentPosition.toDouble(),
               decorator: DotsDecorator(
                   size: const Size.square(9.0),
@@ -107,20 +112,25 @@ class _LiveScoreFragmentState extends State<LiveScoreFragment> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment : MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const DefaultTextStyle(
                         style: TextStyle(
-                        fontSize: 18.0,
-                        fontFamily: 'Poppins',
-                        color: Colors.red,
+                          fontSize: 18.0,
+                          fontFamily: 'Poppins',
+                          color: Colors.red,
                         ),
                         child: Text('Latest News'),
                       ).paddingLeft(16),
                       8.width,
-                      const FaIcon(FontAwesomeIcons.newspaper, color: redColor, size: 18,)
-                    ],),
-                    NewsCard(list: mNewslist),
+                      const FaIcon(
+                        FontAwesomeIcons.newspaper,
+                        color: redColor,
+                        size: 18,
+                      )
+                    ],
+                  ),
+                  NewsCard(list: mNewslist),
                 ],
               ),
             )

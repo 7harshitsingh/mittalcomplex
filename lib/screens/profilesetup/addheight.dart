@@ -6,15 +6,15 @@ import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class AddAbout extends StatefulWidget {
-  const AddAbout({Key? key}) : super(key: key);
+class AddHeight extends StatefulWidget {
+  const AddHeight({Key? key}) : super(key: key);
 
   @override
-  State<AddAbout> createState() => _AddAboutState();
+  State<AddHeight> createState() => _AddHeightState();
 }
 
-class _AddAboutState extends State<AddAbout> {
-  final aboutController = TextEditingController();
+class _AddHeightState extends State<AddHeight> {
+  final heightController = TextEditingController();
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -25,7 +25,7 @@ class _AddAboutState extends State<AddAbout> {
 
   @override
   void dispose() {
-    aboutController.dispose();
+    heightController.dispose();
     setStatusBarColor(transparentColor);
     super.dispose();
   }
@@ -40,20 +40,20 @@ class _AddAboutState extends State<AddAbout> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: heading(title: "Tell about yourself"),
+                child: heading(title: "Add Height"),
               ),
               IconButton(
                   onPressed: () {
-                    final abt = aboutController.text;
-                    AddAbout(about: abt);
+                    final height = heightController.text;
+                    AddHeight(height: height);
                     Navigator.pushAndRemoveUntil<dynamic>(
-                      context,
-                      MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) =>
-                            const ViewProfileScreen(),
-                      ),
-                      (route) => false,
-                    );
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                              const ViewProfileScreen(),
+                        ),
+                        (route) => false,
+                      );
                   },
                   icon: const Icon(
                     Icons.forward,
@@ -69,11 +69,8 @@ class _AddAboutState extends State<AddAbout> {
               children: [
                 AppTextField(
                   autoFocus: true,
-                  controller: aboutController,
-                  validator: (value) => value != null && value.length < 6
-                      ? 'Enter min. 6 characters'
-                      : null,
-                  textFieldType: TextFieldType.MULTILINE,
+                  controller: heightController,
+                  textFieldType: TextFieldType.NUMBER,
                   cursorColor: mcPrimaryColor,
                   textStyle: boldTextStyle(color: Colors.white),
                   suffixIconColor: mcPrimaryColor,
@@ -95,9 +92,13 @@ class _AddAboutState extends State<AddAbout> {
   }
 
   // ignore: non_constant_identifier_names
-  Future AddAbout({required String about}) async {
-    final docUser = FirebaseFirestore.instance.collection('Member').doc(auth.uid);
-    final json = {'about': about};
+  Future AddHeight(
+      {required String height}) async {
+    final docUser =
+        FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
+    final json = {
+      'height': height,
+    };
     await docUser.update(json);
   }
 }

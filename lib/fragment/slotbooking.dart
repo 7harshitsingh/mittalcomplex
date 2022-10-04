@@ -12,9 +12,7 @@ import 'package:mittalcomplex/screens/sportsava/yoga.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import '../screens/sportsava/kabaddi.dart';
-import '../utils/defaultdata.dart';
 
 class BookFragment extends StatefulWidget {
   const BookFragment({Key? key}) : super(key: key);
@@ -24,10 +22,10 @@ class BookFragment extends StatefulWidget {
 }
 
 class _BookFragmentState extends State<BookFragment> {
-  List sportsList = getsportsList();
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: mcPrimaryColorDark,
@@ -81,7 +79,6 @@ class _BookFragmentState extends State<BookFragment> {
                     )
                   ],
                 ),
-                //const BookMainPart(),
                 24.height,
                 sportsContainer(
                   title1: 'Martial Arts',

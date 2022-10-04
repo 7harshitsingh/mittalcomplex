@@ -21,10 +21,10 @@ class _LiveCardComponentState extends State<LiveCardComponent> {
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 30, top: 8),
       decoration: boxDecorationRoundedWithShadow(
         30,
-        backgroundColor: widget.cardModel!.color!.withOpacity(0.2),
+        backgroundColor: redColor.withOpacity(0.2),
         blurRadius: 10.0,
         spreadRadius: 4.0,
-        shadowColor: widget.cardModel!.color!.withAlpha(50),
+        shadowColor: redColor.withAlpha(50),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

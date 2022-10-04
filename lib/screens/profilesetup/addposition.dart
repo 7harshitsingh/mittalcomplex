@@ -7,7 +7,6 @@ import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-String position = '';
 
 class AddPosition extends StatefulWidget {
   const AddPosition({Key? key}) : super(key: key);
@@ -17,6 +16,7 @@ class AddPosition extends StatefulWidget {
 }
 
 class _AddPositionState extends State<AddPosition> {
+  String position = '';
   final auth = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -94,7 +94,7 @@ class _AddPositionState extends State<AddPosition> {
 
   Future addRole({required String role}) async {
     final docUser =
-        FirebaseFirestore.instance.collection(role).doc(auth.uid);
+        FirebaseFirestore.instance.collection('usersData').doc(auth.uid);
     final json = {'role': role};
     await docUser.set(json);
   }  
