@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 AppBar generalappBar(BuildContext context, String title,
     {List<Widget>? actions,
     bool showBack = true,
@@ -140,7 +139,7 @@ Widget indicatorBox() {
   );
 }
 
-settingsContainer(
+Widget settingsContainer(
     {String? title, IconData? icon, Function? onTap, Color? textColor}) {
   return Container(
     padding: const EdgeInsets.all(16),
@@ -157,7 +156,7 @@ settingsContainer(
   ).onTap(onTap);
 }
 
-sportsContainer(
+Widget sportsContainer(
     {String? title1,
     Function? onTap1,
     String? img1,
@@ -195,7 +194,7 @@ sportsContainer(
   );
 }
 
-listComp(String? title, String? subtitle, IconData? icon, String? link,
+Widget listComp(String? title, String? subtitle, IconData? icon, String? link,
     Color? textColor, String? text) {
   return ListTile(
     enabled: true,
@@ -237,7 +236,7 @@ listComp(String? title, String? subtitle, IconData? icon, String? link,
   );
 }
 
-myslotlist(String? title, String? subtitle, IconData? icon, Color? textColor,
+Widget myslotlist(String? title, String? subtitle, IconData? icon, Color? textColor,
     String? text) {
   return ListTile(
     enabled: true,
@@ -274,14 +273,68 @@ myslotlist(String? title, String? subtitle, IconData? icon, Color? textColor,
   );
 }
 
-bookedslotlist(String? title, String? subtitle) {
+Widget bookedslotlist(String? title, String? subtitle) {
   return ListTile(
     enabled: true,
     contentPadding: EdgeInsets.zero,
-    leading: const FaIcon( FontAwesomeIcons.barcode, size: 28, color: Colors.white38,),
-    title: Text(title!, style: primaryTextStyle(color: Colors.white, size: 14),),
-    subtitle: Text( subtitle!, style: primaryTextStyle(color: Colors.white38, size: 14),),
-    trailing: const FaIcon(FontAwesomeIcons.accessibleIcon, size: 15, color: greenColor,),
+    leading: const FaIcon(
+      FontAwesomeIcons.userCheck,
+      size: 28,
+      color: Colors.white38,
+    ),
+    title: Text(
+      title!,
+      style: primaryTextStyle(color: Colors.white, size: 14),
+    ),
+    subtitle: Text(
+      subtitle!,
+      style: primaryTextStyle(color: Colors.white38, size: 14),
+    ),
+    trailing: const FaIcon(
+      FontAwesomeIcons.sailboat,
+      size: 20,
+      color: greenColor,
+    ),
+  );
+}
+
+
+Widget viewslotlist(String? title, String? subtitle, Function()? showcontent) {
+  return ListTile(
+    enabled: true,
+    contentPadding: EdgeInsets.zero,
+    leading: const FaIcon(
+      FontAwesomeIcons.user,
+      size: 28,
+      color: Colors.white38,
+    ),
+    title: Text(
+      title!,
+      style: primaryTextStyle(color: Colors.white, size: 14),
+    ),
+    subtitle: Text(
+      subtitle!,
+      style: primaryTextStyle(color: Colors.white38, size: 14),
+    ),
+    trailing: ElevatedButton(
+      onPressed: showcontent,
+      child: Container(
+        width: 80,
+        height: 35,
+        alignment: Alignment.center,
+        decoration: boxDecorationWithRoundedCorners(
+          borderRadius: BorderRadius.circular(30),
+          backgroundColor: Colors.blue.withOpacity(0.2),
+        ),
+        child: Text(
+          "Book",
+          style: boldTextStyle(
+            size: 12,
+            color: Colors.blue,
+          ),
+        ),
+      ),
+    ),
   );
 }
 

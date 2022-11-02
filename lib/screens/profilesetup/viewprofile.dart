@@ -126,7 +126,7 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                   color: mcPrimaryColor,
                   border: Border.all(color: Colors.white, width: 4),
                   borderRadius: radius(100)),
-              child: avatar == " "
+              child: avatar == " " 
                   ? const Icon(Icons.person, color: Colors.white, size: 150)
                   : Image.network(
                       avatar,
@@ -160,9 +160,6 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                 ),
               ],
             ),
-            7.height,
-            Text(auth.uid,
-                style: secondaryTextStyle(color: Colors.white54, size: 12)),
             8.height,
             Text((auth.email!),
                 style: secondaryTextStyle(color: Colors.white54, size: 12)),
@@ -446,7 +443,7 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                     )).paddingRight(36),
               ],
             ),
-            6.height,
+            12.height,
             Container(
               height: 210,
               width: 336,

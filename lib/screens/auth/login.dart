@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mittalcomplex/screens/auth/forgot.dart';
+import 'package:mittalcomplex/screens/auth/googlesignin.dart';
 import 'package:mittalcomplex/screens/auth/register.dart';
 import 'package:mittalcomplex/utils/colors.dart';
 import 'package:mittalcomplex/utils/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils.dart';
 
@@ -175,17 +177,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     30.height,
                     Text(
-                      'or login with',
+                      'or continue with',
                       style: secondaryTextStyle(color: Colors.white70),
                     ).center(),
                     20.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        FaIcon(
-                          FontAwesomeIcons.google,
-                          size: 30,
-                          color: white,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            final provider = Provider.of<GoogleSignInProvider>(
+                                context,
+                                listen: false);
+                            provider.googleLogin();
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.google,
+                            size: 30,
+                            color: white,
+                          ),
                         )
                       ],
                     )

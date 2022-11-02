@@ -65,9 +65,6 @@ class _AddNameState extends State<AddName> {
                   AppTextField(
                     autoFocus: true,
                     controller: nameController,
-                    validator: (value) => value != null && value.length < 6
-                        ? 'Enter min. 6 characters'
-                        : null,
                     textFieldType: TextFieldType.NAME,
                     cursorColor: mcPrimaryColor,
                     textStyle: boldTextStyle(color: Colors.white),

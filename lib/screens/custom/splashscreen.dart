@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   
   @override
   Widget build(BuildContext context) {
-    Defaultdata service = Provider.of<Defaultdata>(context, listen: false);
-    SlotsData slots = Provider.of<SlotsData>(context, listen: false);
+    Defaultdata service = Provider.of<Defaultdata>(context);
+    SlotsData slots = Provider.of<SlotsData>(context);
     Future.delayed(const Duration(seconds: 3), () async {
       service.getdefaultdataCollectionFromFirebase();
       slots.getSlotsDataCollectionFromFirebase();

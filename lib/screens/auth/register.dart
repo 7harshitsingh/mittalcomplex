@@ -18,7 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final formkey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  
   @override
   void initState() {
     setStatusBarColor(mcPrimaryColorDark);

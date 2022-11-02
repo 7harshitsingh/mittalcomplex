@@ -43,7 +43,8 @@ class _UpcomingEventState extends State<UpcomingEvent> {
         elevation: 0.0,
       ),
       body: Container(
-        padding: const EdgeInsets.only(left: 8, right: 8),
+        padding: const EdgeInsets.only(left: 16, right: 16),
+        margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16, top: 16),
         decoration: boxDecorationRoundedWithShadow(16,
             backgroundColor: mcPrimaryColorDark),
         child: ListView.builder(

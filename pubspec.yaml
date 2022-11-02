@@ -45,8 +45,10 @@ dependencies:
   flutter_vector_icons: ^1.0.0
   font_awesome_flutter: ^10.1.0
   google_fonts: ^3.0.1
+  google_sign_in: ^5.0.3
   image_picker: ^0.8.5+3
   nb_utils: ^4.6.20
+  overlay_support: ^2.0.1
   provider: ^6.0.3
   url_launcher: ^6.1.5
   webview_flutter: ^3.0.4

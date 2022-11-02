@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mittalcomplex/components/explore/upcomingevents.dart';
 import 'package:mittalcomplex/screens/custom/getstarted.dart';
+import 'package:mittalcomplex/screens/custom/memebership.dart';
 import 'package:mittalcomplex/screens/custom/termsandconditions.dart';
 import 'package:mittalcomplex/screens/dashboard/dashboard.dart';
 import 'package:mittalcomplex/screens/profilesetup/addposition.dart';
@@ -87,19 +88,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                 ),
                 settingsContainer(
-                    icon: Icons.settings,
-                    title: 'Settings',
+                    icon: Icons.card_membership_rounded,
+                    title: 'Membership',
                     textColor: white,
-                    onTap: () {}),
+                    onTap: () {
+                      const Membership().launch(context);
+                    }),
                 settingsContainer(
                   icon: Icons.edit,
                   title: 'Edit Profile',
                   textColor: white,
                   onTap: () {
-                    const AddPosition().launch(
-                      context,
-                      pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
-                    );
+                    const AddPosition().launch(context);
                   },
                 ),
                 16.height,

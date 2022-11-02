@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mittalcomplex/models/slotsmodel.dart';
-import 'package:mittalcomplex/utils/slotsdata.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:provider/provider.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets.dart';
 
 class BookedSlot extends StatefulWidget {
-  const BookedSlot({super.key});
+  // ignore: prefer_typing_uninitialized_variables
+  final nav;
+  // ignore: use_key_in_widget_constructors
+  const BookedSlot({required this.nav});
 
   @override
   State<BookedSlot> createState() => _BookedSlotState();
@@ -16,9 +17,8 @@ class BookedSlot extends StatefulWidget {
 class _BookedSlotState extends State<BookedSlot> {
   @override
   Widget build(BuildContext context) {
-    SlotsData service = Provider.of<SlotsData>(context, listen: false);
-    List<SlotsModel> allslotsinfo = service.banSlot();
 
+    List<SlotsModel> allslotsinfo = widget.nav;
     return Scaffold(
         backgroundColor: mcPrimaryColorDark,
         appBar: AppBar(
@@ -42,7 +42,8 @@ class _BookedSlotState extends State<BookedSlot> {
           elevation: 0.0,
         ),
         body: Container(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16, top: 16),
             decoration: boxDecorationRoundedWithShadow(16,
                 backgroundColor: mcPrimaryColorDark),
             child: ListView.builder(
@@ -52,9 +53,8 @@ class _BookedSlotState extends State<BookedSlot> {
                 itemCount: allslotsinfo.length,
                 itemBuilder: (BuildContext context, int index) {
                   SlotsModel allslotsinfolist = allslotsinfo[index];
-                  if (allslotsinfolist.booked == true) {}
-                  return bookedslotlist(
-                      allslotsinfolist.time, allslotsinfolist.bookedby);
+                  return allslotsinfolist.booked == true ? bookedslotlist(
+                      allslotsinfolist.time, allslotsinfolist.bookedby) : const SizedBox.shrink();
                 })));
   }
 }
