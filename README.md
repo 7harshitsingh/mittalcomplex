@@ -8,7 +8,7 @@ Online registration system(ORS) for the indoor sports available at the complex
 
 ## Take a look -
 
-<img src="https://firebasestorage.googleapis.com/v0/b/mittal-complex.appspot.com/o/0cachedmemory%2Freadme%2Fanigif.gif?alt=media&token=e311e6d2-eb4f-4227-a329-90c01eac8e65" width="1067" height="600">
+<img src="https://firebasestorage.googleapis.com/v0/b/mittal-complex.appspot.com/o/0cachedmemory%2Freadme%2Fanigif.gif?alt=media&token=e311e6d2-eb4f-4227-a329-90c01eac8e65" width="1067" height="500">
 
 ## Features
 
